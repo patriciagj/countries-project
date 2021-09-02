@@ -2,10 +2,15 @@ import React from 'react';
 
 import './select-region.component.styles.css';
 
-export const SelectRegion = () => {
+export const SelectRegion = props => {
   return (
     <section className='select'>
-      <select name='select' id='select' className='select__country'>
+      <select
+        name='select'
+        id='select'
+        className='select__country'
+        onChange={event => props.onChange(event)}
+      >
         <option value='Select Region'>Select Region</option>
         <option value='Africa'>Africa</option>
         <option value='America'>America</option>
