@@ -16,12 +16,14 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <div className='app'>
-          <header className='app-header'>World Countries Info</header>
-          <Route path='/' exact>
-            <CountryList />
-          </Route>
-        </div>
+        <React.Fragment>
+          <div className='app'>
+            <header className='app-header'>World Countries Info</header>
+            <Route path='/' exact>
+              <CountryList />
+            </Route>
+          </div>
+        </React.Fragment>
       </Switch>
     );
   }
