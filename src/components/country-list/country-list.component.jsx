@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { SelectRegion } from '../select-region/select-region.component';
 
@@ -36,15 +37,21 @@ export const CountryList = () => {
             country.region === region ? region : region === 'All'
           )
           .map(country => {
-            const { flag, name, capital, population, region, numericCode } =
-              country;
+            const {
+              flag,
+              name,
+              capital,
+              population,
+              region,
+              numericCode,
+              alpha2Code,
+            } = country;
             return (
               <div className='country' key={numericCode}>
                 <img src={flag} alt={name} />
-                <h2>{name}</h2>
-                <h4>Capital: {capital}</h4>
-                <h4>Population: {population}</h4>
-                <h4>Region: {region}</h4>
+                <Link to={`/${alpha2Code}`}>
+                  <h2>{name}</h2>
+                </Link>
               </div>
             );
           })}
