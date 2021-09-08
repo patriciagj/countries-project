@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { CountryList } from './components/country-list/country-list.component';
 import { Country } from './components/country/country.component';
+import { SideBar } from './components/sidebar/sidebar.component';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ class App extends Component {
         <React.Fragment>
           <div className='app'>
             <header className='app-header'>World Countries Info</header>
+            <SideBar />
             <Route path='/' exact>
               <CountryList />
             </Route>

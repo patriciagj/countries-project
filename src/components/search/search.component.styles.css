@@ -1,0 +1,16 @@
+.search {
+  margin-top: 25px;
+  padding: 10px 25px 10px 25px;
+  border: 2px solid #1e1e2c;
+}
+
+.btn__submit {
+  background-color: #1e1e2c;
+  color: #fafafa;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 11px 18px;
+  margin-left: 10px;
+  display: inline-block;
+}
