@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../../redux/actions';
 
 import { SelectRegion } from '../select-region/select-region.component';
 
@@ -10,11 +12,11 @@ import './country-list.component.styles.css';
 const url = `https://restcountries.eu/rest/v2/all`;
 
 export const CountryList = () => {
+  const favourites = useSelector(state => state.favourites);
+  const dispatch = useDispatch();
+
   const [countries, setCountries] = useState([]);
   const [region, setRegion] = useState();
-  const [checkedState, setCheckedState] = useState(
-    new Array(countries.length).fill(false)
-  );
 
   const fetchData = async () => {
     const response = await fetch(url);
@@ -33,11 +35,10 @@ export const CountryList = () => {
     fetchData();
   }, []);
 
-  const handleOnChange = position => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    setCheckedState(updatedCheckedState);
+  const handleOnChange = (event, index) => {
+    event.target.checked
+      ? dispatch(allActions.favouriteCountryActions.favourite(index))
+      : dispatch(allActions.favouriteCountryActions.unfavourite(index));
   };
 
   return (
@@ -62,8 +63,8 @@ export const CountryList = () => {
                   id={`custom-checkbox-${index}`}
                   name={name}
                   value={name}
-                  checked={checkedState[index]}
-                  onChange={() => handleOnChange(index)}
+                  // checked={checkedState(index)}
+                  onChange={event => handleOnChange(event, index)}
                 ></input>
               </div>
             );
