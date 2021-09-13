@@ -2,17 +2,15 @@ import React from 'react';
 
 import './search.component.styles.css';
 
-export const Search = () => {
+export const Search = props => {
   return (
     <form>
       <input
-        type='text'
+        type='search'
         className='search'
         placeholder='Search country'
+        onChange={event => props.onChange(event)}
       ></input>
-      <button type='submit' className='btn__submit'>
-        Search
-      </button>
     </form>
   );
 };

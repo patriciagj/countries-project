@@ -10,6 +10,7 @@ import { Search } from '../search/search.component';
 import './country-list.component.styles.css';
 
 const url = `https://restcountries.eu/rest/v2/all`;
+const urlFilter = `https://restcountries.eu/rest/v2/name/`;
 
 export const CountryList = () => {
   const favourites = useSelector(state => state.favourites);
@@ -41,9 +42,16 @@ export const CountryList = () => {
       : dispatch(allActions.favouriteCountryActions.unfavourite(index));
   };
 
+  const filterCountry = async event => {
+    const response = await fetch(urlFilter + event.target.value);
+    const searchCountry = await response.json();
+    setCountries(searchCountry);
+    console.log(searchCountry);
+  };
+
   return (
     <div>
-      <Search />
+      <Search onChange={filterCountry} />
       <SelectRegion onChange={fetchRegionData} />
       <div className='grid-container'>
         {countries
@@ -64,7 +72,7 @@ export const CountryList = () => {
                   name={name}
                   value={name}
                   // checked={checkedState(index)}
-                  onChange={event => handleOnChange(event, index)}
+                  onChange={event => handleOnChange(event, name)}
                 ></input>
               </div>
             );
