@@ -7,12 +7,25 @@ import { SelectRegion } from '../select-region/select-region.component';
 
 import { Search } from '../search/search.component';
 
-import './country-list.component.styles.css';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, CardActions } from '@mui/material';
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
+import useStyles from '../country-list/country-list.component.styles';
 
 const url = `https://restcountries.eu/rest/v2/all`;
 const urlFilter = `https://restcountries.eu/rest/v2/name/`;
 
 export const CountryList = () => {
+  const classes = useStyles();
   const favourites = useSelector(state => state.favourites);
   const dispatch = useDispatch();
 
@@ -50,10 +63,12 @@ export const CountryList = () => {
   };
 
   return (
-    <div>
-      <Search onChange={filterCountry} />
-      <SelectRegion onChange={fetchRegionData} />
-      <div className='grid-container'>
+    <div className={classes.root}>
+      <div className={classes.inputs}>
+        <Search onChange={filterCountry} />
+        <SelectRegion onChange={fetchRegionData} />
+      </div>
+      <Grid container spacing={4}>
         {countries
           .filter(country =>
             country.region === region ? region : region === 'All'
@@ -61,23 +76,46 @@ export const CountryList = () => {
           .map((country, index) => {
             const { flag, name, numericCode, alpha2Code } = country;
             return (
-              <div className='country' key={numericCode}>
-                <img src={flag} alt={name} />
-                <Link to={`/${alpha2Code}`}>
-                  <h2>{name}</h2>
-                </Link>
-                <input
-                  type='checkbox'
-                  id={`custom-checkbox-${index}`}
-                  name={name}
-                  value={name}
-                  // checked={checkedState(index)}
-                  onChange={event => handleOnChange(event, name)}
-                ></input>
-              </div>
+              <Grid item xs={12} sm={6} md={4}>
+                <Card key={numericCode}>
+                  <CardActionArea>
+                    <CardMedia
+                      component='img'
+                      height='140'
+                      image={flag}
+                      alt='flag'
+                    />
+                    <CardContent>
+                      <Link
+                        to={`/${alpha2Code}`}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Typography gutterBottom variant='h6' component='div'>
+                          {name}
+                        </Typography>
+                      </Link>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions className={classes.action}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          type='checkbox'
+                          id={`custom-checkbox-${index}`}
+                          name={name}
+                          value={name}
+                          onChange={event => handleOnChange(event, name)}
+                          icon={<FavoriteBorder />}
+                          checkedIcon={<Favorite />}
+                        />
+                      }
+                    />
+                  </CardActions>
+                </Card>
+              </Grid>
             );
           })}
-      </div>
+      </Grid>
     </div>
   );
 };
