@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import allActions from '../../redux/actions';
 
 import { Search } from '../search/search.component';
 
@@ -8,17 +9,25 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
+
 import useStyles from './sidebar.component.styles';
 
 export const SideBar = () => {
   const classes = useStyles();
   const favourites = useSelector(state => state.favourites);
+  const dispatch = useDispatch();
 
   const [filteredFavourite, setFavourite] = useState();
 
   const filterFavourite = event => {
     console.log(event.target.value);
     setFavourite(event.target.value);
+  };
+
+  const handleRemove = country => {
+    dispatch(allActions.favouriteCountryActions.unfavourite(country));
   };
 
   return (
@@ -44,8 +53,16 @@ export const SideBar = () => {
             )
             .map((country, index) => {
               return (
-                <div className='country' key={index}>
+                <div key={index}>
                   {country}
+                  <IconButton
+                    color='primary'
+                    aria-label='upload picture'
+                    component='span'
+                    onClick={() => handleRemove(country)}
+                  >
+                    <ClearIcon fontSize='small' />
+                  </IconButton>
                 </div>
               );
             })}
