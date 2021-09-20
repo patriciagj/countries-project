@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import './country.component.styles.css';
+import Typography from '@material-ui/core/Typography';
+
+import useStyles from '../country/country.component.styles';
 
 const url = `https://restcountries.eu/rest/v2/alpha/`;
 
 export const Country = () => {
+  const classes = useStyles();
   const { countryCode } = useParams();
 
   const [country, setCountry] = useState([]);
@@ -22,13 +25,11 @@ export const Country = () => {
   }, []);
 
   return (
-    <div>
-      <section className='country__details'>
-        <h3>{country.name}</h3>
-        <h4>Capital: {country.capital}</h4>
-        <h4>Population: {country.population}</h4>
-        <h4>Region: {country.region}</h4>
-      </section>
+    <div className={classes.content}>
+      <Typography variant='h4'>{country.name}</Typography>
+      <Typography variant='h6'>Capital: {country.capital}</Typography>
+      <Typography variant='h6'>Population: {country.population}</Typography>
+      <Typography variant='h6'>Region: {country.region}</Typography>
     </div>
   );
 };

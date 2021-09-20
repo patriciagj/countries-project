@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   inputs: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     marginBottom: '20px',
   },
 }));
