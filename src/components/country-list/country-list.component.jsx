@@ -55,6 +55,10 @@ export const CountryList = () => {
       : dispatch(allActions.favouriteCountryActions.unfavourite(index));
   };
 
+  const isFavourite = name => {
+    return favourites.includes(name);
+  };
+
   const filterCountry = async event => {
     const response = await fetch(urlFilter + event.target.value);
     const searchCountry = await response.json();
@@ -76,8 +80,8 @@ export const CountryList = () => {
           .map((country, index) => {
             const { flag, name, numericCode, alpha2Code } = country;
             return (
-              <Grid item xs={12} sm={6} md={4}>
-                <Card key={numericCode}>
+              <Grid key={numericCode} item xs={12} sm={6} md={4}>
+                <Card>
                   <CardActionArea>
                     <CardMedia
                       component='img'
@@ -104,6 +108,7 @@ export const CountryList = () => {
                           id={`custom-checkbox-${index}`}
                           name={name}
                           value={name}
+                          checked={isFavourite(name)}
                           onChange={event => handleOnChange(event, name)}
                           icon={<FavoriteBorder />}
                           checkedIcon={<Favorite />}
