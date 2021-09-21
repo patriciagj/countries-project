@@ -13,7 +13,7 @@ export const Header = () => {
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
-          <Typography variant='h6' noWrap>
+          <Typography variant='h1' noWrap>
             World Countries Info
           </Typography>
         </Toolbar>

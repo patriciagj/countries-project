@@ -80,7 +80,7 @@ export const CountryList = () => {
           .map((country, index) => {
             const { flag, name, numericCode, alpha2Code } = country;
             return (
-              <Grid key={numericCode} item xs={12} sm={6} md={4}>
+              <Grid key={numericCode} item xs={12} sm={6} md={3}>
                 <Card>
                   <CardActionArea>
                     <CardMedia
@@ -92,7 +92,7 @@ export const CountryList = () => {
                     <CardContent>
                       <Link
                         to={`/${alpha2Code}`}
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: 'none', color: 'black' }}
                       >
                         <Typography gutterBottom variant='h6' component='div'>
                           {name}

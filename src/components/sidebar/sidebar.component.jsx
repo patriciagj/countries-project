@@ -56,7 +56,6 @@ export const SideBar = () => {
                 <div key={index}>
                   {country}
                   <IconButton
-                    color='primary'
                     aria-label='upload picture'
                     component='span'
                     onClick={() => handleRemove(country)}
