@@ -6,23 +6,28 @@ import Typography from '@material-ui/core/Typography';
 
 import useStyles from '../country/country.component.styles';
 
-const url = `https://restcountries.eu/rest/v2/alpha/`;
+const url = `https://restcountries.com/v2/alpha/`;
 
 export const Country = () => {
   const classes = useStyles();
   const { countryCode } = useParams();
 
   const [country, setCountry] = useState([]);
+
   const fetchCountry = async () => {
-    const response = await fetch(url + countryCode);
-    const country = await response.json();
-    setCountry(country);
-    console.log(country);
+    try {
+      const response = await fetch(url + countryCode);
+      const country = await response.json();
+      setCountry(country);
+      console.log(country);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
     fetchCountry();
-  }, []);
+  }, []); // empty dependency array means that the hook will only trigger once when the component is first rendered
 
   return (
     <div className={classes.content}>

@@ -12,7 +12,9 @@ const unfavourite = index => {
   };
 };
 
-export default {
+const favourites = {
   favourite,
   unfavourite,
 };
+
+export default favourites;
