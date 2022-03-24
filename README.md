@@ -2,6 +2,8 @@
 
 app with information of a country in the world using API REST Countries, React and Redux
 
+<img src="public/images/screenshotWorldCountriesInfo.png?raw=true" alt="World Countries Flags" width="800"/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
